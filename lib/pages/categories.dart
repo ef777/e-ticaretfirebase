@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 // ignore: camel_case_types
-class mycart extends StatefulWidget {
-  const mycart({Key? key}) : super(key: key);
+class categories extends StatefulWidget {
+  const categories({Key? key}) : super(key: key);
 
   @override
-  State<mycart> createState() => mycartState();
+  State<categories> createState() => categoriespageState();
 }
 
 // ignore: camel_case_types
-class mycartState extends State<mycart> {
+class categoriespageState extends State<categories> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int pageview = 0;

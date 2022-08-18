@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:fluttericon/typicons_icons.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class home extends StatefulWidget {
+  const home({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late bool logindurum = false;
 
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     List<Widget> sayfalar = [
-      Home_page(),
+      home_page(),
 
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];

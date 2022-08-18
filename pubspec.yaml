@@ -41,6 +41,15 @@ dependencies:
   google_fonts: ^2.3.1
   shared_preferences: ^2.0.13
   art_sweetalert: ^0.0.5  
+  
+ 
+ 
+ 
+ 
+ 
+  firebase_core: ^1.20.0
+  firebase_storage: ^10.3.4
+  cloud_firestore: any 
 
 dev_dependencies:
   flutter_test:

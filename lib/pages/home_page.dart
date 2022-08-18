@@ -6,17 +6,17 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 
 // ignore: camel_case_types
-class Home_page extends StatefulWidget {
-  Home_page({
+class home_page extends StatefulWidget {
+  home_page({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<Home_page> createState() => _Home_pageState();
+  State<home_page> createState() => _Home_pageState();
 }
 
 // ignore: camel_case_types
-class _Home_pageState extends State<Home_page> {
+class _Home_pageState extends State<home_page> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
