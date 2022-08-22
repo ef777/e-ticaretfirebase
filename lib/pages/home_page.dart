@@ -43,7 +43,7 @@ class _Home_pageState extends State<home_page> {
                   future: Future.wait([]),
                   builder: (context, AsyncSnapshot<List<dynamic>> snaphost) {
                     if (snaphost.hasData) {
-                      var veri = snaphost.data?[0];
+                      //  var veri = snaphost.data?[0];
 
                       return CustomScrollView(slivers: [
                         SliverAppBar(

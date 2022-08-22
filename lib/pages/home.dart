@@ -1,7 +1,11 @@
 import 'dart:io';
 
 import 'package:ankprj/config/config.dart';
+import 'package:ankprj/pages/categories.dart';
 import 'package:ankprj/pages/home_page.dart';
+import 'package:ankprj/pages/itemlist.dart';
+import 'package:ankprj/pages/user/mycart.dart';
+import 'package:ankprj/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -21,10 +25,18 @@ class _HomeState extends State<home> {
   List pagekey = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
   ];
 
   @override
   void initState() {
+    if (Config.login == 0) {
+      Navigator.pushNamed(
+        context,
+        '/welcome',
+      );
+    }
     Config.checkInternet();
 
     super.initState();
@@ -36,7 +48,9 @@ class _HomeState extends State<home> {
   Widget build(BuildContext context) {
     List<Widget> sayfalar = [
       home_page(),
-
+      item_list(),
+      categories(),
+      mycart(),
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];
     return WillPopScope(
@@ -87,14 +101,28 @@ class _HomeState extends State<home> {
                     FontAwesome.home,
                     size: 20,
                   ),
-                  label: "Home Page",
+                  label: "Home",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesome.circle_empty,
                     size: 20,
                   ),
-                  label: "Cities Page",
+                  label: "Items",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesome.circle_empty,
+                    size: 20,
+                  ),
+                  label: "Categories",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesome.circle_empty,
+                    size: 20,
+                  ),
+                  label: "Cart",
                 ),
               ],
               currentIndex: Config.selectedIndex,

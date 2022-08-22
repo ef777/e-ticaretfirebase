@@ -20,6 +20,7 @@ class getconfig extends GetxController {
 }
 
 class Config extends ChangeNotifier {
+  static int login = 0;
   static String url = "https:?";
   static final apiKey = "";
   static int selectedIndex = 0;
