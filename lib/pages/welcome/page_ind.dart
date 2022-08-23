@@ -118,7 +118,7 @@ class PageBubble extends StatelessWidget {
           ),
           child: new Opacity(
             opacity: viewModel.activePercent,
-            child: Image.asset(
+            child: Icon(
               viewModel.iconAssetPath,
               color: viewModel.color,
             ),
@@ -130,7 +130,7 @@ class PageBubble extends StatelessWidget {
 }
 
 class PageBubbleViewModel {
-  final String iconAssetPath;
+  final IconData iconAssetPath;
   final Color color;
   final bool isHollow;
   final double activePercent;

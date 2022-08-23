@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ankprj/pages/home.dart';
+import 'package:ankprj/pages/user/loginpage.dart';
 import 'package:ankprj/pages/welcome/opages.dart';
 import 'package:ankprj/pages/welcome/page_dragger.dart';
 import 'package:ankprj/pages/welcome/page_ind.dart';
@@ -90,6 +92,35 @@ class _MyHomePageState extends State<welcome> with TickerProviderStateMixin {
               percentVisible: slidePercent,
             ),
           ),
+          new Padding(
+              padding: EdgeInsets.fromLTRB(5, 5, 5, 120),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MaterialButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => home()),
+                            );
+                          },
+                          child: new Text('Gözat'),
+                        ),
+                        MaterialButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                            );
+                          },
+                          child: new Text('Giriş'),
+                        )
+                      ]))),
           new PagerIndicator(
             viewModel: new PagerIndicatorViewModel(
               pages,

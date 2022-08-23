@@ -31,12 +31,7 @@ class _HomeState extends State<home> {
 
   @override
   void initState() {
-    if (Config.login == 0) {
-      Navigator.pushNamed(
-        context,
-        '/welcome',
-      );
-    }
+    if (Config.login == 0) {}
     Config.checkInternet();
 
     super.initState();

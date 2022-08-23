@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'config/config.dart';
 import 'firebase_options.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'pnr',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: '/',
+      initialRoute: Config.login == 0 ? '/welcome' : '/home',
       routes: {
         '/': (context) => const home(),
         '/welcome': (context) => welcome(),

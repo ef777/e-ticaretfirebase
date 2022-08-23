@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 
 final pages = [
   new PageViewModel(
-      Color.fromARGB(255, 172, 17, 17),
-      'assets/indir.png',
-      'Pınar Kuruyemiş',
-      'Harika lezzetler diyarına hoşgeldiniz!',
-      'assets/indir.png'),
-  new PageViewModel(const Color(0xFFE4534D), 'assets/citirkarisik2.jpg',
-      'Hep Taze', 'Taze hep taze hep taze', 'assets/citirkarisik2.jpg'),
+    Color.fromARGB(255, 172, 17, 17),
+    'assets/indir.png',
+    'Pınar Kuruyemiş',
+    'Harika lezzetler diyarına hoşgeldiniz!',
+    Icons.person,
+  ),
   new PageViewModel(
-    const Color(0xFFFF682D),
+      Color.fromARGB(255, 17, 204, 26),
+      'assets/citirkarisik2.jpg',
+      'Hep Taze',
+      'Taze hep taze hep taze',
+      Icons.favorite),
+  new PageViewModel(
+    Color.fromARGB(255, 135, 12, 160),
     'assets/truck.png',
     'Jet Sipariş',
     'Dilediğiniz atıştırmalıklar artık cebinizde!',
-    'assets/truck.png',
+    Icons.local_shipping,
   ),
 ];
 
@@ -87,7 +92,7 @@ class PageViewModel {
   final String heroAssetPath;
   final String title;
   final String body;
-  final String iconAssetPath;
+  final IconData iconAssetPath;
 
   PageViewModel(
     this.color,

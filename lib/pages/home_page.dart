@@ -1,4 +1,5 @@
 import 'package:ankprj/config/config.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -36,6 +37,47 @@ class _Home_pageState extends State<home_page> {
     final double itemWidth = size.width / 2;
     var veri;
     return Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                ),
+                title: const Text('Page 1'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.train,
+                ),
+                title: const Text('Page 2'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
+            backgroundColor: Colors.green,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {},
+              ),
+            ],
+            title: Text('Pınar kuruyemiş')),
         key: _scaffoldKey,
         body: Obx(() => Stack(children: [
               Text(c.konumdegisti.value.toString()),

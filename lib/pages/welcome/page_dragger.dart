@@ -21,11 +21,11 @@ class PageDragger extends StatefulWidget {
 }
 
 class _PageDraggerState extends State<PageDragger> {
-  static const FULL_TRANSTITION_PX = 300.0;
+  static const FULL_TRANSTITION_PX = 100.0;
 
   late Offset? dragStart;
   late SlideDirection slideDirection;
-  double slidePercent = 0.0;
+  double slidePercent = 0.25;
 
   onDragStart(DragStartDetails details) {
     dragStart = details.globalPosition;
@@ -75,7 +75,7 @@ class _PageDraggerState extends State<PageDragger> {
 }
 
 class AnimatedPageDragger {
-  static const PERCENT_PER_MILLISECOND = 0.005;
+  static const PERCENT_PER_MILLISECOND = 2;
 
   final slideDirection;
   final transitionGoal;
