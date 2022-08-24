@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,7 +13,9 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
-  late PageController _pageController;
+  PageController _pageController = PageController(
+    initialPage: 0,
+  );
 
   List<String> images = [
     "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
@@ -20,11 +24,29 @@ class _CarouselState extends State<Carousel> {
   ];
 
   int activePage = 1;
-
+  late Timer _timer;
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.8, initialPage: 1);
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (activePage < 2) {
+        activePage++;
+      } else {
+        activePage = 0;
+      }
+
+      _pageController.animateToPage(
+        activePage,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
   }
 
   @override

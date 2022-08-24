@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:ankprj/components/carosel.dart';
-import 'package:ankprj/components/tuhaf.dart';
+import 'package:ankprj/components/grid.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -148,15 +148,15 @@ class _Home_pageState extends State<home_page> {
                             child: Visibility(
                           visible: (1 > 0) ? true : false,
                           child: Container(
-                            height: 200,
-                            margin: new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: view(gridItems: _gridItems),
-                          ),
+                              height: itemHeight - 200,
+                              margin:
+                                  new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
+                              child: view(gridItems: _gridItems)),
                         )),
                       ]);
                     } else {
