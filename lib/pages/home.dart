@@ -26,7 +26,6 @@ class _HomeState extends State<home> {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
   ];
 
   @override
@@ -44,7 +43,6 @@ class _HomeState extends State<home> {
     List<Widget> sayfalar = [
       home_page(),
       item_list(),
-      categories(),
       mycart(),
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];
@@ -100,21 +98,14 @@ class _HomeState extends State<home> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    FontAwesome.circle_empty,
+                    FontAwesome.food,
                     size: 20,
                   ),
                   label: "Items",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    FontAwesome.circle_empty,
-                    size: 20,
-                  ),
-                  label: "Categories",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesome.circle_empty,
+                    FontAwesome.cart_plus,
                     size: 20,
                   ),
                   label: "Cart",

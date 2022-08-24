@@ -43,7 +43,6 @@ dependencies:
   art_sweetalert: ^0.0.5  
   firebase_auth: any
   firebase_dynamic_links: any
-  
   cached_network_image: ^3.1.0
   the_apple_sign_in: ^1.1.1
   url_launcher: ^6.0.12

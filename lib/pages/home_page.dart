@@ -1,3 +1,4 @@
+import 'package:ankprj/components/carosel.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: camel_case_types
 class home_page extends StatefulWidget {
@@ -69,15 +71,6 @@ class _Home_pageState extends State<home_page> {
             ],
           ),
         ),
-        appBar: AppBar(
-            backgroundColor: Colors.green,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {},
-              ),
-            ],
-            title: Text('Pınar kuruyemiş')),
         key: _scaffoldKey,
         body: Obx(() => Stack(children: [
               Text(c.konumdegisti.value.toString()),
@@ -89,39 +82,58 @@ class _Home_pageState extends State<home_page> {
 
                       return CustomScrollView(slivers: [
                         SliverAppBar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.green,
+                          leading: IconButton(
+                            icon: Icon(
+                              Icons.info,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                          actions: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.settings,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                          centerTitle: true,
+                          title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                    width: 25,
+                                    height: 25,
+                                    child: Image.asset("assets/indir.png")),
+                                Text('Pınar kuruyemiş',
+                                    style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold))),
+                              ]),
                           pinned: true,
-                          expandedHeight: 100.0,
+                          expandedHeight: 10.0,
                           flexibleSpace: FlexibleSpaceBar(
                             centerTitle: true,
-                            title: Text(
-                              'test',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 14),
-                            ),
                           ),
                         ),
                         SliverToBoxAdapter(
                             child: Visibility(
                                 visible: (1 > 0) ? true : false,
                                 child: SizedBox(
-                                    height: 70,
                                     child: Container(
                                         margin: new EdgeInsets.fromLTRB(
                                             20.0, 20, 20.0, 5.0),
                                         padding:
                                             EdgeInsets.fromLTRB(5, 0, 5, 0),
                                         decoration: BoxDecoration(
-                                          color: Colors.grey,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(8)),
                                         ),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: []))))),
+                                        child: Carousel())))),
                       ]);
                     } else {
                       return const Center(

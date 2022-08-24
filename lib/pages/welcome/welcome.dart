@@ -102,9 +102,9 @@ class _MyHomePageState extends State<welcome> with TickerProviderStateMixin {
                         MaterialButton(
                           color: Colors.white,
                           onPressed: () {
-                            Navigator.pushReplacement(
+                            Navigator.pushReplacementNamed(
                               context,
-                              MaterialPageRoute(builder: (context) => home()),
+                              '/home',
                             );
                           },
                           child: new Text('Gözat'),
@@ -112,10 +112,9 @@ class _MyHomePageState extends State<welcome> with TickerProviderStateMixin {
                         MaterialButton(
                           color: Colors.white,
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
+                              '/home',
                             );
                           },
                           child: new Text('Giriş'),
