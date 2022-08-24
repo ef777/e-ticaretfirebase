@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:ankprj/components/carosel.dart';
+import 'package:ankprj/components/tuhaf.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +37,7 @@ class _Home_pageState extends State<home_page> {
 
   @override
   Widget build(BuildContext context) {
+    var _gridItems = ["şu", "bu", "şu", "buu", ""];
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
     final double itemWidth = size.width / 2;
@@ -93,6 +97,13 @@ class _Home_pageState extends State<home_page> {
                           actions: [
                             IconButton(
                               icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: Icon(
                                 Icons.settings,
                                 color: Colors.white,
                               ),
@@ -123,17 +134,30 @@ class _Home_pageState extends State<home_page> {
                         SliverToBoxAdapter(
                             child: Visibility(
                                 visible: (1 > 0) ? true : false,
-                                child: SizedBox(
-                                    child: Container(
-                                        margin: new EdgeInsets.fromLTRB(
-                                            20.0, 20, 20.0, 5.0),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8)),
-                                        ),
-                                        child: Carousel())))),
+                                child: Container(
+                                    height: itemHeight - 100,
+                                    margin: new EdgeInsets.fromLTRB(
+                                        5.0, 10, 10.0, 5.0),
+                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                    child: Carousel()))),
+                        SliverToBoxAdapter(
+                            child: Visibility(
+                          visible: (1 > 0) ? true : false,
+                          child: Container(
+                            height: 200,
+                            margin: new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                            ),
+                            child: view(gridItems: _gridItems),
+                          ),
+                        )),
                       ]);
                     } else {
                       return const Center(

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Carousel extends StatefulWidget {
-  const Carousel({
+class maincat extends StatefulWidget {
+  const maincat({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<Carousel> createState() => _CarouselState();
+  State<maincat> createState() => maincatState();
 }
 
-class _CarouselState extends State<Carousel> {
+class maincatState extends State<maincat> {
   late PageController _pageController;
 
   List<String> images = [
@@ -29,7 +29,7 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -48,20 +48,13 @@ class _CarouselState extends State<Carousel> {
                 return slider(images, pagePosition, active);
               }),
         ),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-                padding: EdgeInsets.fromLTRB(1, 1, 1, 20),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: indicators(images.length, activePage))))
       ],
     );
   }
 }
 
 AnimatedContainer slider(images, pagePosition, active) {
-  double margin = active ? 1 : 10;
+  double margin = active ? 10 : 20;
 
   return AnimatedContainer(
     duration: Duration(milliseconds: 500),
@@ -79,27 +72,14 @@ imageAnimation(PageController animation, images, pagePosition) {
       print(pagePosition);
 
       return SizedBox(
-        width: 250,
+        width: 200,
         height: 200,
         child: widget,
       );
     },
     child: Container(
-      margin: EdgeInsets.all(0),
+      margin: EdgeInsets.all(10),
       child: Image.network(images[pagePosition]),
     ),
   );
-}
-
-List<Widget> indicators(imagesLength, currentIndex) {
-  return List<Widget>.generate(imagesLength, (index) {
-    return Container(
-      margin: EdgeInsets.all(3),
-      width: 10,
-      height: 10,
-      decoration: BoxDecoration(
-          color: currentIndex == index ? Colors.grey : Colors.white,
-          shape: BoxShape.circle),
-    );
-  });
 }
