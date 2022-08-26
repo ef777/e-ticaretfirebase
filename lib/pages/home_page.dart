@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:ankprj/components/carosel.dart';
 import 'package:ankprj/components/grid.dart';
+import 'package:ankprj/components/urun.dart';
+import 'package:ankprj/components/urungrup_title.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -29,15 +31,44 @@ class _Home_pageState extends State<home_page> {
 
   @override
   var c = Get.put(getconfig());
+  late PageController _pageController;
+  int pageview = 0;
 
   @override
   void initState() {
+    geturungrup(urungruptip);
     super.initState();
+    _pageController =
+        PageController(initialPage: pageview, viewportFraction: 0.6);
   }
 
+  geturungrup(String tip) {
+    print("get urun başladi");
+    // _urungruplari = []
+//    print(_urungruplari.whenComplete(() => print("urun grup geldiiiii")));
+    // _banner = [];
+    //   print(_banner.whenComplete(() => print("banner geldiiii")));
+
+    // _vitringup = [];
+    //  print(_vitringup.whenComplete(() => print("vitrin urunleri geldiiii")));
+    setState(() {
+      print("ozel");
+      print(tip.toString());
+      secimrenk = tip;
+      urungruptip = tip;
+    });
+  }
+
+  int urungrupakitf = 0;
+  String urungruptip = "firsat_urunleri";
+  String secimrenk = "";
+  String secili = "";
   @override
   Widget build(BuildContext context) {
     var _gridItems = ["şu", "bu", "şu", "buu", ""];
+    Future<List> _banner;
+    Future<List> _urungruplari;
+    Future<List> _vitringup;
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
     final double itemWidth = size.width / 2;
@@ -83,7 +114,9 @@ class _Home_pageState extends State<home_page> {
                   builder: (context, AsyncSnapshot<List<dynamic>> snaphost) {
                     if (snaphost.hasData) {
                       //  var veri = snaphost.data?[0];
-
+                      var banner = snaphost.data![0];
+                      var urungruplari = snaphost.data![1];
+                      var vitringrup = snaphost.data![2];
                       return CustomScrollView(slivers: [
                         SliverAppBar(
                           backgroundColor: Colors.green,
@@ -158,6 +191,75 @@ class _Home_pageState extends State<home_page> {
                               ),
                               child: view(gridItems: _gridItems)),
                         )),
+                        SliverToBoxAdapter(
+                          child: Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(top: 15, bottom: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Urungrup_title(
+                                  tiklandi: secimrenk,
+                                  title: "Fırsat",
+                                  tip: "firsat_urunleri",
+                                  onpress: () {
+                                    geturungrup("firsat_urunleri");
+                                  },
+                                ),
+                                Urungrup_title(
+                                  tip: "one_cikan_urunler",
+                                  tiklandi: secimrenk,
+                                  title: "Öne Çıkan",
+                                  onpress: () {
+                                    geturungrup("one_cikan_urunler");
+                                  },
+                                ),
+                                Urungrup_title(
+                                  tip: "cok_satilanlar",
+                                  tiklandi: secimrenk,
+                                  title: "En Çok Satılanlar",
+                                  onpress: () {
+                                    geturungrup("cok_satilanlar");
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SliverToBoxAdapter(
+                          child: Visibility(
+                            visible: (urungruplari.length > 0) ? true : false,
+                            child: Container(
+                              width: itemWidth,
+                              margin:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              height: itemHeight,
+                              child: PageView.builder(
+                                controller: _pageController,
+                                padEnds: false,
+                                itemBuilder: (context, index) {
+                                  var body = urungruplari![index];
+                                  return Urun_Blog(
+                                    indirim: "var",
+                                    title: "urun",
+                                    img:
+                                        "https://wallpaperaccess.com/full/2637581.jpg",
+                                    kargo: "10",
+                                    fiyat: "20",
+                                    urunkodu: "0",
+                                    tip: "100",
+                                    birimdeger: "22",
+                                    degerlendirme: "4",
+                                    yorumadet: "2",
+                                    id: "1",
+                                  );
+                                },
+                                itemCount: urungruplari.length,
+                              ),
+                            ),
+                          ),
+                        )
                       ]);
                     } else {
                       return const Center(

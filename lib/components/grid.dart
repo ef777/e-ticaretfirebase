@@ -43,7 +43,7 @@ class _viewState extends State<view> {
         scrollDirection: Axis.horizontal,
         child: Container(
             height: 100,
-            width: 2000,
+            width: 700,
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
