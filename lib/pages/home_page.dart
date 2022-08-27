@@ -114,12 +114,18 @@ class _Home_pageState extends State<home_page> {
                   builder: (context, AsyncSnapshot<List<dynamic>> snaphost) {
                     if (snaphost.hasData) {
                       //  var veri = snaphost.data?[0];
-                      var banner = snaphost.data![0];
-                      var urungruplari = snaphost.data![1];
-                      var vitringrup = snaphost.data![2];
+                      // var banner = snaphost.data![0];
+                      var urungruplari = [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]; // var vitringrup = snaphost.data![2];
                       return CustomScrollView(slivers: [
                         SliverAppBar(
-                          backgroundColor: Colors.green,
+                          expandedHeight: 260.0,
+                          floating: false,
+                          backgroundColor: Colors.red,
                           leading: IconButton(
                             icon: Icon(
                               Icons.info,
@@ -159,24 +165,20 @@ class _Home_pageState extends State<home_page> {
                                             fontWeight: FontWeight.bold))),
                               ]),
                           pinned: true,
-                          expandedHeight: 10.0,
                           flexibleSpace: FlexibleSpaceBar(
                             centerTitle: true,
+                            background: Container(
+                                height: itemHeight - 100,
+                                margin:
+                                    new EdgeInsets.fromLTRB(0.0, 0, 0.0, 0.0),
+                                padding: EdgeInsets.fromLTRB(0, 85, 0, 0),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                ),
+                                child: Carousel()),
                           ),
                         ),
-                        SliverToBoxAdapter(
-                            child: Visibility(
-                                visible: (1 > 0) ? true : false,
-                                child: Container(
-                                    height: itemHeight - 100,
-                                    margin: new EdgeInsets.fromLTRB(
-                                        5.0, 10, 10.0, 5.0),
-                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    child: Carousel()))),
                         SliverToBoxAdapter(
                             child: Visibility(
                           visible: (1 > 0) ? true : false,
@@ -259,7 +261,21 @@ class _Home_pageState extends State<home_page> {
                               ),
                             ),
                           ),
-                        )
+                        ),
+                        SliverToBoxAdapter(
+                            child: Visibility(
+                          visible: (1 > 0) ? true : false,
+                          child: Container(
+                              height: itemHeight - 200,
+                              margin:
+                                  new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
+                              child: view(gridItems: _gridItems)),
+                        )),
                       ]);
                     } else {
                       return const Center(
