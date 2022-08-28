@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:ankprj/components/carosel.dart';
 import 'package:ankprj/components/grid.dart';
+import 'package:ankprj/components/pageview2.dart';
 import 'package:ankprj/components/searchbar.dart';
 import 'package:ankprj/components/urun.dart';
 import 'package:ankprj/components/urungrup_title.dart';
@@ -14,6 +15,8 @@ import 'package:fluttericon/font_awesome_icons.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../models/altpageviewmodel.dart';
 
 // ignore: camel_case_types
 class home_page extends StatefulWidget {
@@ -34,11 +37,21 @@ class _Home_pageState extends State<home_page> {
   @override
   var c = Get.put(getconfig());
   late PageController _pageController;
+  final _controller2 = PageController(
+    viewportFraction: 1,
+  );
   int pageview = 0;
+  late final _itemWidth =
+      MediaQuery.of(context).size.width * _controller2.viewportFraction;
   late Timer _timer;
+  double _page = 0;
+  int get _firstItemIndex => _page.toInt();
 
   @override
   void initState() {
+    _controller2.addListener(() => setState(() {
+          _page = _controller2.page!;
+        }));
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (pageview < 10 - 1) {
         pageview++;
@@ -55,7 +68,7 @@ class _Home_pageState extends State<home_page> {
     geturungrup(urungruptip);
     super.initState();
     _pageController =
-        PageController(initialPage: pageview, viewportFraction: 0.6);
+        PageController(initialPage: pageview, viewportFraction: 0.5);
   }
 
   geturungrup(String tip) {
@@ -179,45 +192,29 @@ class _Home_pageState extends State<home_page> {
                                   ))),
                           expandedHeight: 280.0,
                           floating: true,
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.white,
                           leading: IconButton(
                             icon: Icon(
                               Icons.info,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             onPressed: () {},
                           ),
                           actions: [
                             IconButton(
                               icon: Icon(
-                                Icons.settings,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: Icon(
                                 Icons.person,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               onPressed: () {},
                             ),
                           ],
                           centerTitle: true,
-                          title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                    width: 25,
-                                    height: 25,
-                                    child: Image.asset("assets/indir.png")),
-                                Text('Pınar kuruyemiş',
-                                    style: GoogleFonts.roboto(
-                                        textStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold))),
-                              ]),
+                          title: SizedBox(
+                              width: 100,
+                              height: 50,
+                              child:
+                                  Image.asset("assets/48-logo-png-logo.png")),
                           pinned: true,
                           snap: false,
                           flexibleSpace: FlexibleSpaceBar(
@@ -231,16 +228,15 @@ class _Home_pageState extends State<home_page> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8)),
                                 ),
-                                child: Carousel()),
+                                child: Carousel(option: "ustmenu")),
                           ),
                         ),
                         SliverToBoxAdapter(
                             child: Visibility(
                           visible: (1 > 0) ? true : false,
                           child: Container(
-                              height: itemHeight - 200,
-                              margin:
-                                  new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
+                              height: itemHeight - 190,
+                              margin: new EdgeInsets.fromLTRB(5.0, 2, 5.0, 2.0),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                               decoration: BoxDecoration(
                                 borderRadius:
@@ -253,7 +249,8 @@ class _Home_pageState extends State<home_page> {
                         SliverToBoxAdapter(
                           child: Container(
                             width: double.infinity,
-                            margin: const EdgeInsets.only(top: 15, bottom: 10),
+                            padding: EdgeInsets.fromLTRB(10.0, 0, 0.0, 10.0),
+                            margin: const EdgeInsets.only(top: 10, bottom: 0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -291,9 +288,9 @@ class _Home_pageState extends State<home_page> {
                             visible: (urungruplari.length > 0) ? true : false,
                             child: Container(
                               width: itemWidth,
-                              margin:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
-                              height: itemHeight,
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              margin: const EdgeInsets.only(top: 0, bottom: 5),
+                              height: itemHeight - 40,
                               child: PageView.builder(
                                 padEnds: false,
                                 controller: _pageController,
@@ -322,18 +319,200 @@ class _Home_pageState extends State<home_page> {
                           ),
                         ),
                         SliverToBoxAdapter(
-                            child: Visibility(
-                          visible: (1 > 0) ? true : false,
-                          child: Container(
-                            height: itemHeight - 200,
-                            margin: new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
+                          child: Visibility(
+                            visible: (1 > 0) ? true : false,
+                            child: Container(
+                              height: itemHeight - 100,
+                              margin: new EdgeInsets.fromLTRB(0.0, 0, 0.0, 0.0),
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned.fill(
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: SizedBox(
+                                        width: _itemWidth,
+                                        child: FractionallySizedBox(
+                                          child: PageViewItem(
+                                            index: _firstItemIndex,
+                                            width: _itemWidth,
+                                            url: images2[_firstItemIndex],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 100,
+                                    child: PageView.builder(
+                                      padEnds: false,
+                                      controller: _controller2,
+                                      itemBuilder: (context, index) {
+                                        return Opacity(
+                                          opacity:
+                                              index <= _firstItemIndex ? 0 : 1,
+                                          child: PageViewItem(
+                                            index: index,
+                                            width: _itemWidth,
+                                            url: images2[index],
+                                          ),
+                                        );
+                                      },
+                                      itemCount: images2.length,
+                                    ),
+                                  ),
+                                  Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(30, 30, 0, 0),
+                                        child: SizedBox(
+                                            width: 60,
+                                            height: 60,
+                                            child: Image.network(
+                                                "https://www.cerezpinari.com/UserFiles/Fotograflar/thumbs/30-pinar-kuruyemis-png-pinar-kuruyemis.png")),
+                                      )),
+                                  Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.red.withOpacity(0.8),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(20)),
+                                            border: Border.all(
+                                                width: 1, color: Colors.red)),
+                                        height: 62,
+                                        width: 200,
+                                        margin:
+                                            EdgeInsets.fromLTRB(0, 0, 30, 20),
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                        child: Text.rich(
+                                          TextSpan(
+                                            text:
+                                                "Lokum ve Cezeryelerimiz PANCAR şekerinden üretilmiştir",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ), // default text style
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text:
+                                                    '  Mısır şurubu ve GLİKOZ içermez',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                ],
+                              ),
                             ),
                           ),
-                        )),
+                        ),
+                        SliverToBoxAdapter(
+                            child: Visibility(
+                                visible: (1 > 0) ? true : false,
+                                child: Container(
+                                    height: itemHeight - 200,
+                                    margin: new EdgeInsets.fromLTRB(
+                                        0.0, 0, 0.0, 0.0),
+                                    padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                    child: Container(
+                                        child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(20)),
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: Colors.grey)),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 10),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 5),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text("Müşteri Hizmetleri"),
+                                                  Text(
+                                                    "444 75 42",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(20)),
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: Colors.grey)),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 10),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 5),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text("250 TL ve Üzeri"),
+                                                  Text(
+                                                    "Ücretsiz Kargo",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
+                                        )
+                                      ],
+                                    ))))),
                       ]);
                     } else {
                       return const Center(

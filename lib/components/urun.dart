@@ -79,7 +79,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
                   widget.img,
                   fit: BoxFit.contain,
                   width: MediaQuery.of(context).size.width,
-                  height: 130,
+                  height: 120,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -94,7 +94,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
                   },
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 2,
                 ),
                 SizedBox(
                   child: Text(
@@ -103,7 +103,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 13),
                   ),
-                  height: 25,
+                  height: 15,
                 ),
                 SizedBox(
                   child: Text.rich(
@@ -111,12 +111,12 @@ class _Urun_BlogState extends State<Urun_Blog> {
                       text: widget.fiyat.toString() + '.00 TL',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                       ), // default text style
                       children: <TextSpan>[],
                     ),
                   ),
-                  height: 25,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -134,16 +134,17 @@ class _Urun_BlogState extends State<Urun_Blog> {
                       ),
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 2,
                     ),
                     MaterialButton(
+                      minWidth: 40,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
                       color: Colors.red,
                       onPressed: () {},
                       child: Text(
-                        "Sepete Ekle",
-                        style: TextStyle(color: Colors.white),
+                        "Ekle",
+                        style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
 
                       /*MaterialButton(

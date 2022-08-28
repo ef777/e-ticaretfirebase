@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Carousel extends StatefulWidget {
-  const Carousel({
+  String option;
+  Carousel({
+    required this.option,
     Key? key,
   }) : super(key: key);
 
@@ -24,11 +26,14 @@ class _CarouselState extends State<Carousel> {
     "https://www.cerezpinari.com/UserFiles/Fotograflar/617-badem-slider-png-badem-slider.png"
   ];
 
+  List<String> secili_images = [];
   int activePage = 1;
   late Timer _timer;
   @override
   void initState() {
     super.initState();
+
+    secili_images = images;
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (activePage < images.length - 1) {
         activePage++;
@@ -58,7 +63,7 @@ class _CarouselState extends State<Carousel> {
           width: MediaQuery.of(context).size.width,
           height: 200,
           child: PageView.builder(
-              itemCount: images.length,
+              itemCount: secili_images.length,
               pageSnapping: true,
               controller: _pageController,
               onPageChanged: (page) {
@@ -68,7 +73,7 @@ class _CarouselState extends State<Carousel> {
               },
               itemBuilder: (context, pagePosition) {
                 bool active = pagePosition == activePage;
-                return slider(images, pagePosition, active);
+                return slider(secili_images, pagePosition, active);
               }),
         ),
         Align(
@@ -77,7 +82,7 @@ class _CarouselState extends State<Carousel> {
                 padding: EdgeInsets.fromLTRB(1, 1, 1, 20),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: indicators(images.length, activePage))))
+                    children: indicators(secili_images.length, activePage))))
       ],
     );
   }

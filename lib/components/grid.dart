@@ -52,7 +52,7 @@ class _viewState extends State<view> {
         controller: _controller,
         scrollDirection: Axis.horizontal,
         child: Container(
-            height: 100,
+            height: 140,
             width: MediaQuery.of(context).size.width * 2.010,
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -66,16 +66,25 @@ class _viewState extends State<view> {
               itemBuilder: (context, index) {
                 return GridTile(
                     child: Container(
+                        height: 210,
                         alignment: Alignment.center,
                         child: Stack(children: [
-                          CircleAvatar(
-                            radius: 100.0,
-                            backgroundImage: NetworkImage(
-                              widget.gridImage![index],
-                            ),
-                            backgroundColor: Colors.transparent,
-                          ),
-                          Text(widget.gridItems![index])
+                          Container(
+                              height: 70,
+                              child: CircleAvatar(
+                                radius: 100,
+                                backgroundImage: NetworkImage(
+                                  widget.gridImage![index],
+                                ),
+                                backgroundColor: Colors.transparent,
+                              )),
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                  widget.gridItems![index]))
                         ])));
               },
             )),

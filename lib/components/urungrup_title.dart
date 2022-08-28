@@ -28,6 +28,7 @@ class Urungrup_title extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Text(title,
             style: TextStyle(
+              fontSize: 13,
               color: tiklandi == tip ? Colors.white : Colors.black,
             )),
       ),
