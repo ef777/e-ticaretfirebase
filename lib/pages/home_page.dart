@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:ankprj/components/carosel.dart';
 import 'package:ankprj/components/grid.dart';
+import 'package:ankprj/components/searchbar.dart';
 import 'package:ankprj/components/urun.dart';
 import 'package:ankprj/components/urungrup_title.dart';
 import 'package:ankprj/config/config.dart';
@@ -33,9 +35,23 @@ class _Home_pageState extends State<home_page> {
   var c = Get.put(getconfig());
   late PageController _pageController;
   int pageview = 0;
+  late Timer _timer;
 
   @override
   void initState() {
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (pageview < 10 - 1) {
+        pageview++;
+      } else {
+        pageview = 0;
+      }
+
+      _pageController.animateToPage(
+        pageview,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
     geturungrup(urungruptip);
     super.initState();
     _pageController =
@@ -65,13 +81,32 @@ class _Home_pageState extends State<home_page> {
   String secili = "";
   @override
   Widget build(BuildContext context) {
-    var _gridItems = ["şu", "bu", "şu", "buu", ""];
+    var _gridItems = [
+      "Kuruyemişler",
+      "Çiğ Yemişler",
+      "Kuru Meyveler",
+      "Lokumlar & Sucuklar",
+      "Şekerler",
+      "Cezerye & Krokanlar",
+      "Kahve",
+      "Diğer Ürünler"
+    ];
+    var _gridimage = [
+      "https://cerezpinari.com/UserFiles/Fotograflar/91-01-png-01.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/92-02-png-02.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/93-03-png-03.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/94-04-png-04.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/103-akide-seker-akide.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/96-06-png-06.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/97-07-png-07.png",
+      "https://cerezpinari.com/UserFiles/Fotograflar/90-08-png-08.png"
+    ];
     Future<List> _banner;
     Future<List> _urungruplari;
     Future<List> _vitringup;
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
-    final double itemWidth = size.width / 2;
+    final double itemWidth = size.width / 5;
     var veri;
     return Scaffold(
         drawer: Drawer(
@@ -119,12 +154,31 @@ class _Home_pageState extends State<home_page> {
                         "1",
                         "2",
                         "3",
-                        "4"
+                        "4",
+                        "5",
+                        "6",
+                        "7"
                       ]; // var vitringrup = snaphost.data![2];
                       return CustomScrollView(slivers: [
                         SliverAppBar(
-                          expandedHeight: 260.0,
-                          floating: false,
+                          bottom: AppBar(
+                              elevation: 1,
+                              automaticallyImplyLeading: false,
+                              title: Container(
+                                  width: double.infinity,
+                                  height: 40,
+                                  color: Colors.white,
+                                  child: const Center(
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(10),
+                                        hintText: 'Aramak İstediğiniz Ürün?',
+                                        suffixIcon: Icon(Icons.search),
+                                      ),
+                                    ),
+                                  ))),
+                          expandedHeight: 280.0,
+                          floating: true,
                           backgroundColor: Colors.red,
                           leading: IconButton(
                             icon: Icon(
@@ -136,14 +190,14 @@ class _Home_pageState extends State<home_page> {
                           actions: [
                             IconButton(
                               icon: Icon(
-                                Icons.search,
+                                Icons.settings,
                                 color: Colors.white,
                               ),
                               onPressed: () {},
                             ),
                             IconButton(
                               icon: Icon(
-                                Icons.settings,
+                                Icons.person,
                                 color: Colors.white,
                               ),
                               onPressed: () {},
@@ -165,13 +219,14 @@ class _Home_pageState extends State<home_page> {
                                             fontWeight: FontWeight.bold))),
                               ]),
                           pinned: true,
+                          snap: false,
                           flexibleSpace: FlexibleSpaceBar(
                             centerTitle: true,
                             background: Container(
-                                height: itemHeight - 100,
+                                height: itemHeight - 120,
                                 margin:
                                     new EdgeInsets.fromLTRB(0.0, 0, 0.0, 0.0),
-                                padding: EdgeInsets.fromLTRB(0, 85, 0, 0),
+                                padding: EdgeInsets.fromLTRB(0, 85, 0, 40),
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8)),
@@ -191,7 +246,9 @@ class _Home_pageState extends State<home_page> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8)),
                               ),
-                              child: view(gridItems: _gridItems)),
+                              child: view(
+                                  gridImage: _gridimage,
+                                  gridItems: _gridItems)),
                         )),
                         SliverToBoxAdapter(
                           child: Container(
@@ -203,7 +260,7 @@ class _Home_pageState extends State<home_page> {
                               children: [
                                 Urungrup_title(
                                   tiklandi: secimrenk,
-                                  title: "Fırsat",
+                                  title: "Fırsat Ürünleri",
                                   tip: "firsat_urunleri",
                                   onpress: () {
                                     geturungrup("firsat_urunleri");
@@ -212,7 +269,7 @@ class _Home_pageState extends State<home_page> {
                                 Urungrup_title(
                                   tip: "one_cikan_urunler",
                                   tiklandi: secimrenk,
-                                  title: "Öne Çıkan",
+                                  title: "En Çok Satanlar",
                                   onpress: () {
                                     geturungrup("one_cikan_urunler");
                                   },
@@ -220,7 +277,7 @@ class _Home_pageState extends State<home_page> {
                                 Urungrup_title(
                                   tip: "cok_satilanlar",
                                   tiklandi: secimrenk,
-                                  title: "En Çok Satılanlar",
+                                  title: "Yeni Ürünler",
                                   onpress: () {
                                     geturungrup("cok_satilanlar");
                                   },
@@ -238,15 +295,17 @@ class _Home_pageState extends State<home_page> {
                                   const EdgeInsets.only(top: 10, bottom: 10),
                               height: itemHeight,
                               child: PageView.builder(
-                                controller: _pageController,
                                 padEnds: false,
+                                controller: _pageController,
                                 itemBuilder: (context, index) {
-                                  var body = urungruplari![index];
-                                  return Urun_Blog(
+                                  return SizedBox(
+                                      child: Urun_Blog(
+                                    aciklama:
+                                        " Klasik çerez lezzetlerinden vazgeçemiyor musunuz? O halde sizlere önerimiz tuzlu fıstık!",
                                     indirim: "var",
-                                    title: "urun",
+                                    title: "Lüks karışık kuruyemiş",
                                     img:
-                                        "https://wallpaperaccess.com/full/2637581.jpg",
+                                        "https://www.cerezpinari.com/UserFiles/Fotograflar/698-kabuklu-badem-cig-410-kabuklu-badem-cig-235-jpg-kabuklu-badem-cig-235-jpg-410-kabuklu-badem-cig-235-jpg-kabuklu-badem-cig-235.jpg",
                                     kargo: "10",
                                     fiyat: "20",
                                     urunkodu: "0",
@@ -255,7 +314,7 @@ class _Home_pageState extends State<home_page> {
                                     degerlendirme: "4",
                                     yorumadet: "2",
                                     id: "1",
-                                  );
+                                  ));
                                 },
                                 itemCount: urungruplari.length,
                               ),
@@ -266,15 +325,14 @@ class _Home_pageState extends State<home_page> {
                             child: Visibility(
                           visible: (1 > 0) ? true : false,
                           child: Container(
-                              height: itemHeight - 200,
-                              margin:
-                                  new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                              ),
-                              child: view(gridItems: _gridItems)),
+                            height: itemHeight - 200,
+                            margin: new EdgeInsets.fromLTRB(5.0, 10, 10.0, 5.0),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                            ),
+                          ),
                         )),
                       ]);
                     } else {
@@ -283,7 +341,7 @@ class _Home_pageState extends State<home_page> {
                           width: 32,
                           height: 32,
                           child: CircularProgressIndicator(
-                            color: Colors.green,
+                            color: Colors.red,
                           ),
                         ),
                       );

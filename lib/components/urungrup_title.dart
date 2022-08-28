@@ -21,7 +21,7 @@ class Urungrup_title extends StatelessWidget {
       onTap: onpress,
       child: Container(
         decoration: BoxDecoration(
-            color: tiklandi == tip ? Colors.green : Colors.white,
+            color: tiklandi == tip ? Colors.red : Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             border: Border.all(width: 1, color: Colors.grey)),
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:ankprj/components/adetinput.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:ankprj/models/urunmodel.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class Urun_Blog extends StatefulWidget {
       birimdeger,
       degerlendirme,
       yorumadet,
+      aciklama,
       id;
 
   Urun_Blog({
@@ -34,6 +36,7 @@ class Urun_Blog extends StatefulWidget {
     required this.birimdeger,
     required this.degerlendirme,
     required this.yorumadet,
+    required this.aciklama,
   }) : super(key: key);
 
   @override
@@ -61,23 +64,22 @@ class _Urun_BlogState extends State<Urun_Blog> {
           Get.toNamed("/urun_detay", arguments: widget.id);
         },
         child: Container(
-          height: 200,
-          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 4,
           margin: const EdgeInsets.all(7),
           padding: const EdgeInsets.all(7),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(width: 0.1, color: Colors.purple),
+            border: Border.all(width: 0.1, color: Colors.red),
           ),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image.network(
                   widget.img,
                   fit: BoxFit.contain,
                   width: MediaQuery.of(context).size.width,
-                  height: 100,
+                  height: 130,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -101,39 +103,50 @@ class _Urun_BlogState extends State<Urun_Blog> {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 13),
                   ),
-                  height: 38,
+                  height: 25,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  child: Text.rich(
+                    TextSpan(
+                      text: widget.fiyat.toString() + '.00 TL',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ), // default text style
+                      children: <TextSpan>[],
+                    ),
+                  ),
+                  height: 25,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text.rich(
-                      TextSpan(
-                        text: '₺' + widget.fiyat.toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ), // default text style
-                        children: <TextSpan>[
-                          TextSpan(
-                            text:
-                                ' / ${widget.tip} ${widget.birimdeger.toString()}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.normal, fontSize: 12),
-                          ),
-                        ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 5,
+                      child: Adetinput(
+                        ilkadet: adet,
+                        maxadet: 100,
+                        minadet: 1,
+                        adetgetir: (val) {
+                          adet = int.parse(val.toString());
+                        },
                       ),
                     ),
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: MaterialButton(
+                    SizedBox(
+                      width: 5,
+                    ),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      color: Colors.red,
+                      onPressed: () {},
+                      child: Text(
+                        "Sepete Ekle",
+                        style: TextStyle(color: Colors.white),
+                      ),
+
+                      /*MaterialButton(
                           shape: CircleBorder(
                             side: BorderSide(
                                 color: Colors.purple,
@@ -176,7 +189,8 @@ class _Urun_BlogState extends State<Urun_Blog> {
                             }
                           },
                           splashColor: Colors.green,
-                        )),
+                        )*/
+                    ),
                   ],
                 ),
               ]),

@@ -94,21 +94,21 @@ class _HomeState extends State<home> {
                     FontAwesome.home,
                     size: 20,
                   ),
-                  label: "Home",
+                  label: "Vitrin",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesome.food,
                     size: 20,
                   ),
-                  label: "Items",
+                  label: "ürünler",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesome.cart_plus,
                     size: 20,
                   ),
-                  label: "Cart",
+                  label: "Sepet",
                 ),
               ],
               currentIndex: Config.selectedIndex,

@@ -5,9 +5,12 @@ import 'package:flutter/widgets.dart';
 
 class view extends StatefulWidget {
   List<String>? gridItems;
+  List<String>? gridImage;
+
   view({
     Key? key,
     required this.gridItems,
+    required this.gridImage,
   }) : super(
           key: key,
         );
@@ -23,13 +26,20 @@ class _viewState extends State<view> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => scrollAnimated(500));
+    _controller.addListener(() {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+        print("end");
+        WidgetsBinding.instance
+            .addPostFrameCallback((_) => scrollAnimated(-500));
+      }
+    });
   }
 
   void scrollAnimated(double position) {
     _controller.animateTo(
       position,
-      duration: Duration(seconds: 100),
-      curve: Curves.ease,
+      duration: Duration(seconds: 70),
+      curve: Curves.linear,
     );
   }
 
@@ -43,7 +53,7 @@ class _viewState extends State<view> {
         scrollDirection: Axis.horizontal,
         child: Container(
             height: 100,
-            width: 700,
+            width: MediaQuery.of(context).size.width * 2.010,
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -56,9 +66,17 @@ class _viewState extends State<view> {
               itemBuilder: (context, index) {
                 return GridTile(
                     child: Container(
-                        color: Colors.blue[200],
                         alignment: Alignment.center,
-                        child: Text(widget.gridItems![index])));
+                        child: Stack(children: [
+                          CircleAvatar(
+                            radius: 100.0,
+                            backgroundImage: NetworkImage(
+                              widget.gridImage![index],
+                            ),
+                            backgroundColor: Colors.transparent,
+                          ),
+                          Text(widget.gridItems![index])
+                        ])));
               },
             )),
       ),

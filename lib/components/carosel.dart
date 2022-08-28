@@ -18,9 +18,10 @@ class _CarouselState extends State<Carousel> {
   );
 
   List<String> images = [
-    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
-    "https://wallpaperaccess.com/full/2637581.jpg",
-    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+    "https://www.cerezpinari.com/UserFiles/Fotograflar/639-lokumlar-jpg-lokumlar.jpg",
+    "https://www.cerezpinari.com/UserFiles/Fotograflar/638-kuru-meyve-jpg-kuru-meyve.jpg",
+    "https://www.cerezpinari.com/UserFiles/Fotograflar/636-kuruyemis-jpg-kuruyemis.jpg",
+    "https://www.cerezpinari.com/UserFiles/Fotograflar/617-badem-slider-png-badem-slider.png"
   ];
 
   int activePage = 1;
@@ -29,7 +30,7 @@ class _CarouselState extends State<Carousel> {
   void initState() {
     super.initState();
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      if (activePage < 2) {
+      if (activePage < images.length - 1) {
         activePage++;
       } else {
         activePage = 0;
@@ -120,7 +121,7 @@ List<Widget> indicators(imagesLength, currentIndex) {
       width: 10,
       height: 10,
       decoration: BoxDecoration(
-          color: currentIndex == index ? Colors.grey : Colors.white,
+          color: currentIndex == index ? Colors.white : Colors.grey,
           shape: BoxShape.circle),
     );
   });
