@@ -5,7 +5,6 @@ import 'package:ankprj/pages/categories.dart';
 import 'package:ankprj/pages/home_page.dart';
 import 'package:ankprj/pages/itemlist.dart';
 import 'package:ankprj/pages/user/mycart.dart';
-import 'package:ankprj/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
