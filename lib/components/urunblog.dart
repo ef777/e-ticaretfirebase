@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:ankprj/components/adetinput.dart';
 import 'package:ankprj/config/config.dart';
-import 'package:ankprj/models/urunmodel.dart';
+import 'package:ankprj/pages/urundetay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -47,13 +47,6 @@ class _Urun_BlogState extends State<Urun_Blog> {
   // late final Urundetay? datam;
 
   late int adet = 1;
-  late final Future<List<Urunliste_model>> urundetayy;
-  Future<List<Urunliste_model>> urunGetir(String id) async {
-    var veriler = await Config().getMethod(id, id);
-    var body = json.decode(veriler) as List;
-    print(body);
-    return body.map((e) => Urunliste_model.fromJson(e)).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +54,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
         onTap: () {
           // Navigator.of(context)
           //     .push(MaterialPageRoute(builder: (context) => Duyurular()));
-          Get.toNamed("/urun_detay", arguments: widget.id);
+          Get.to(() => urundetay(urunid: widget.id));
         },
         child: Container(
           height: MediaQuery.of(context).size.height / 4,

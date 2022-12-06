@@ -5,7 +5,6 @@ import 'package:ankprj/components/carosel.dart';
 import 'package:ankprj/components/grid.dart';
 import 'package:ankprj/components/pageview2.dart';
 import 'package:ankprj/components/searchbar.dart';
-import 'package:ankprj/components/urun.dart';
 import 'package:ankprj/components/urungrup_title.dart';
 import 'package:ankprj/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +15,7 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../components/urunblog.dart';
 import '../models/altpageviewmodel.dart';
 
 // ignore: camel_case_types

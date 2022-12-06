@@ -22,6 +22,46 @@ class getconfig extends GetxController {
 class Config extends ChangeNotifier {
   static int login = 0;
 
+  static int selectedIndex = 0;
+  static bool konumsecildi = false;
+  static String anapagesecilen = "";
+  static String? il = "İl Seçin";
+  static String plaka = "";
+  static String ilce = "ilçe Seçin";
+  static String ilcekey = "";
+  static String mahalle = "Mahalle Seçin";
+  static String mahallekey = "";
+  static double lang = 0;
+  static double long = 0;
+  static String kanal = "perakende";
+  static String kargosure = "0";
+  static String kargoucret = "0";
+  static double minfiyat = 0;
+  static double maxfiyat = 1500;
+  static String iceriku = "0";
+  static String statu = "0";
+  static String kimden = "0";
+  static String uretim = "0";
+  static String tezgah = "0";
+  static String degerlendirme = "0";
+  //statu
+  static bool bahceden = false;
+  static bool yoresel = false;
+  static bool dogal = false;
+  static bool organik = false;
+  static bool tasarim = false;
+  static bool endust = false;
+// kimden
+  static bool uretici = false;
+  static bool koopera = false;
+  static bool magaza = false;
+
+  //uretim
+  static bool yerli = false;
+  static bool ithal = false;
+
+  static bool logindurum = false;
+  static String kullaniciid = "0";
   getMethod(String urlm, Object data) async {
     try {
       var sonuc = await http.get(Uri.parse(urlm), headers: {
@@ -58,7 +98,6 @@ class Config extends ChangeNotifier {
 
   static String url = "https:?";
   static final apiKey = "";
-  static int selectedIndex = 0;
 
   static Future<bool> checkInternet() async {
     try {

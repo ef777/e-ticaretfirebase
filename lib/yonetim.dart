@@ -5,7 +5,8 @@ import 'package:ankprj/pages/categories.dart';
 import 'package:ankprj/pages/error_page.dart';
 import 'package:ankprj/pages/home.dart';
 import 'package:ankprj/pages/home_page.dart';
-import 'package:ankprj/pages/itemlist.dart';
+import 'package:ankprj/pages/itemslist.dart';
+import 'package:ankprj/pages/urundetay.dart';
 import 'package:ankprj/pages/user/mycart.dart';
 import 'package:ankprj/pages/welcome/we_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,6 +47,9 @@ class yonetim extends StatelessWidget {
         '/': (context) => const home(),
         '/welcome': (context) => WelcomeScreen(),
         '/homepage': (context) => home_page(),
+        '/urun_detay': (context) => urundetay(
+              urunid: '',
+            ),
         '/itemlist': (context) => item_list(),
         '/cart': (context) => const mycart(),
         '/categories': (context) => categories(),

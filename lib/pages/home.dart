@@ -3,12 +3,31 @@ import 'dart:io';
 import 'package:ankprj/config/config.dart';
 import 'package:ankprj/pages/categories.dart';
 import 'package:ankprj/pages/home_page.dart';
-import 'package:ankprj/pages/itemlist.dart';
+import 'package:ankprj/pages/itemslist.dart';
 import 'package:ankprj/pages/user/mycart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:fluttericon/typicons_icons.dart';
+import 'package:fluttericon/brandico_icons.dart';
+import 'package:fluttericon/elusive_icons.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/fontelico_icons.dart';
+import 'package:fluttericon/iconic_icons.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
+import 'package:fluttericon/maki_icons.dart';
+import 'package:fluttericon/meteocons_icons.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:fluttericon/modern_pictograms_icons.dart';
+import 'package:fluttericon/octicons_icons.dart';
+import 'package:fluttericon/rpg_awesome_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
+import 'package:fluttericon/zocial_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -87,7 +106,7 @@ class _HomeState extends State<home> {
               backgroundColor: Colors.white,
               type: BottomNavigationBarType.fixed,
               iconSize: 30,
-              items: const <BottomNavigationBarItem>[
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesome.home,
@@ -96,15 +115,15 @@ class _HomeState extends State<home> {
                   label: "Vitrin",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesome.food,
-                    size: 20,
+                  icon: SvgPicture.asset(
+                    "assets/pea.svg",
+                    width: 20,
                   ),
-                  label: "ürünler",
+                  label: "Ürünler",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    FontAwesome.cart_plus,
+                    FontAwesome.shopping_basket,
                     size: 20,
                   ),
                   label: "Sepet",
