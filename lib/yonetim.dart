@@ -50,7 +50,9 @@ class yonetim extends StatelessWidget {
         '/urun_detay': (context) => urundetay(
               urunid: '',
             ),
-        '/itemlist': (context) => item_list(),
+        '/itemlist': (context) => item_list(
+              kategorim: '1',
+            ),
         '/cart': (context) => const mycart(),
         '/categories': (context) => categories(),
       },
@@ -66,7 +68,9 @@ class yonetim extends StatelessWidget {
             );
           case '/itemlist':
             return MaterialPageRoute(
-              builder: (context) => item_list(),
+              builder: (context) => item_list(
+                kategorim: '1',
+              ),
             );
           case '/cart':
             return MaterialPageRoute(

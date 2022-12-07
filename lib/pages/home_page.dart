@@ -157,12 +157,14 @@ class _Home_pageState extends State<home_page> {
         key: _scaffoldKey,
         body: Obx(() => Stack(children: [
               Text(c.konumdegisti.value.toString()),
-              FutureBuilder(
-                  future: Future.wait([]),
-                  builder: (context, AsyncSnapshot<List<dynamic>> snaphost) {
-                    if (snaphost.hasData) {
-                      //  var veri = snaphost.data?[0];
-                      // var banner = snaphost.data![0];
+              FutureBuilder<QuerySnapshot>(
+                  // <2> Pass `Future<QuerySnapshot>` to future
+                  future:
+                      FirebaseFirestore.instance.collection('urunler').get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final List<DocumentSnapshot> documents =
+                          snapshot.data!.docs;
                       var urungruplari = [
                         "1",
                         "2",
@@ -178,12 +180,18 @@ class _Home_pageState extends State<home_page> {
                               elevation: 1,
                               automaticallyImplyLeading: false,
                               title: Container(
+                                  color: Colors.white10,
                                   width: double.infinity,
                                   height: 40,
-                                  color: Colors.white,
                                   child: const Center(
                                     child: TextField(
+                                      cursorColor: Colors.red,
                                       decoration: InputDecoration(
+                                        focusColor: Colors.red,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        errorBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
                                         contentPadding: EdgeInsets.all(10),
                                         hintText: 'Aramak İstediğiniz Ürün?',
                                         suffixIcon: Icon(Icons.search),
@@ -295,25 +303,36 @@ class _Home_pageState extends State<home_page> {
                                 padEnds: false,
                                 controller: _pageController,
                                 itemBuilder: (context, index) {
+                                  var body = snapshot.data!.docs[index];
                                   return SizedBox(
                                       child: Urun_Blog(
-                                    aciklama:
-                                        " Klasik çerez lezzetlerinden vazgeçemiyor musunuz? O halde sizlere önerimiz tuzlu fıstık!",
-                                    indirim: "var",
-                                    title: "Lüks karışık kuruyemiş",
-                                    img:
-                                        "https://www.cerezpinari.com/UserFiles/Fotograflar/698-kabuklu-badem-cig-410-kabuklu-badem-cig-235-jpg-kabuklu-badem-cig-235-jpg-410-kabuklu-badem-cig-235-jpg-kabuklu-badem-cig-235.jpg",
-                                    kargo: "10",
-                                    fiyat: "20",
-                                    urunkodu: "0",
-                                    tip: "100",
-                                    birimdeger: "22",
-                                    degerlendirme: "4",
-                                    yorumadet: "2",
-                                    id: "1",
+                                    id: body["id"].toString(),
+                                    aciklama: body["aciklama"].toString(),
+                                    adi: body["adi"],
+                                    fiyat: body["fiyat"].toString(),
+                                    resimler: body["resimler"][0].toString(),
+                                    coksatilen: body["coksatilen"].toString(),
+                                    firsat: body["fırsat"].toString(),
+                                    yeni: body["yeni"].toString(),
+                                    yayinda: body["yayinda"].toString(),
+                                    indirimorani:
+                                        body["indirimorani"].toString(),
+                                    kargoaciklama:
+                                        body["kargoaciklama"].toString(),
+                                    kargotip: body["kargotip"].toString(),
+                                    kategori: body["kategori"].toString(),
+                                    kdv: body["kdv"].toString(),
+                                    satisadeti: body["satisadeti"].toString(),
+                                    stokadeti: body["stokadeti"].toString(),
+                                    kod: body["kod"].toString(),
+                                    birim: body["birim"].toString(),
+                                    tipurunbirim:
+                                        body["tipurunbirim"].toString(),
+                                    genelpuan: body["genelpuan"].toString(),
+                                    yorumsayisi: body["yorumsayisi"].toString(),
                                   ));
                                 },
-                                itemCount: urungruplari.length,
+                                itemCount: snapshot.data!.docs.length,
                               ),
                             ),
                           ),

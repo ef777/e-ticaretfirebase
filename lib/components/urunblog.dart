@@ -10,33 +10,51 @@ import 'package:get/route_manager.dart';
 
 // ignore: camel_case_types
 class Urun_Blog extends StatefulWidget {
-  final String indirim,
-      title,
-      img,
-      kargo,
-      fiyat,
-      urunkodu,
-      tip,
-      birimdeger,
-      degerlendirme,
-      yorumadet,
+  final String id,
+      adi,
       aciklama,
-      id;
+      fiyat,
+      resimler,
+      coksatilen,
+      yeni,
+      yayinda,
+      indirimorani,
+      kargoaciklama,
+      kargotip,
+      kategori,
+      kdv,
+      satisadeti,
+      stokadeti,
+      birim,
+      tipurunbirim,
+      genelpuan,
+      yorumsayisi,
+      firsat,
+      kod;
 
   Urun_Blog({
     Key? key,
-    required this.indirim,
     required this.id,
-    required this.urunkodu,
-    required this.title,
-    required this.img,
-    required this.kargo,
-    required this.fiyat,
-    required this.tip,
-    required this.birimdeger,
-    required this.degerlendirme,
-    required this.yorumadet,
+    required this.adi,
     required this.aciklama,
+    required this.fiyat,
+    required this.resimler,
+    required this.coksatilen,
+    required this.yeni,
+    required this.yayinda,
+    required this.indirimorani,
+    required this.kargoaciklama,
+    required this.kargotip,
+    required this.kategori,
+    required this.kdv,
+    required this.satisadeti,
+    required this.stokadeti,
+    required this.birim,
+    required this.tipurunbirim,
+    required this.genelpuan,
+    required this.yorumsayisi,
+    required this.firsat,
+    required this.kod,
   }) : super(key: key);
 
   @override
@@ -69,7 +87,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image.network(
-                  widget.img,
+                  widget.resimler,
                   fit: BoxFit.contain,
                   width: MediaQuery.of(context).size.width,
                   height: 120,
@@ -91,7 +109,7 @@ class _Urun_BlogState extends State<Urun_Blog> {
                 ),
                 SizedBox(
                   child: Text(
-                    widget.title,
+                    widget.adi,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 13),
@@ -130,14 +148,15 @@ class _Urun_BlogState extends State<Urun_Blog> {
                       width: 2,
                     ),
                     MaterialButton(
-                      minWidth: 40,
+                      minWidth: 35,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
                       color: Colors.red,
                       onPressed: () {},
-                      child: Text(
-                        "Ekle",
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      child: Icon(
+                        Icons.add_shopping_cart,
+                        color: Colors.white,
+                        size: 15,
                       ),
 
                       /*MaterialButton(

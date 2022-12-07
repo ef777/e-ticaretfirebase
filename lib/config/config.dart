@@ -9,6 +9,10 @@ import 'package:http/http.dart' as http;
 class getconfig extends GetxController {
   static final active = false.obs;
   final konumdegisti = false.obs;
+  final favori = false.obs;
+  favorile() {
+    favori(!favori.value);
+  }
 
   konumla() {
     konumdegisti(!konumdegisti.value);

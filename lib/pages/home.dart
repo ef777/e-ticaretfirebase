@@ -60,7 +60,9 @@ class _HomeState extends State<home> {
   Widget build(BuildContext context) {
     List<Widget> sayfalar = [
       home_page(),
-      item_list(),
+      item_list(
+        kategorim: '1',
+      ),
       mycart(),
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];
