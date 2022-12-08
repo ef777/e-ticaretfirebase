@@ -59,32 +59,31 @@ class _AdetinputState extends State<Adetinput> {
                     ))),
             Expanded(
               child: Container(
-                height: 34,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.grey)),
-                child: TextField(
-                  onChanged: (val) {
-                    setState(() {
-                      int.parse(val) < 0 ? adet = 1 : adet = int.parse(val);
-                    });
-                  },
-                  keyboardType: TextInputType.number,
-                  textDirection: TextDirection.rtl,
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    height: 0,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+                  height: 34,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+                  alignment: Alignment.center,
+                  child: TextField(
+                    onChanged: (val) {
+                      setState(() {
+                        int.parse(val) < 0 ? adet = 1 : adet = int.parse(val);
+                      });
+                    },
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    controller: _controller,
+                    decoration: new InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      hintText: 'Mobile Number',
+                    ),
+                  )),
             ),
             Expanded(
               child: IconButton(

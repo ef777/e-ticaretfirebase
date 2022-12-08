@@ -53,6 +53,92 @@ class urundetaystate extends State<urundetay> {
 
     bool taze = true, toptan = false, jet = false;
     return Scaffold(
+        bottomNavigationBar: BottomAppBar(
+            elevation: 8,
+            shape: CircularNotchedRectangle(),
+            color: Colors.white,
+            child: Container(
+                padding: const EdgeInsets.all(8),
+                width: double.infinity,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: RichText(
+                              maxLines: 1,
+                              text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: '0 ₺',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' / kg',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(5)),
+                            width: 75,
+                            child: Adetinput(
+                              ilkadet: adet,
+                              maxadet: 10,
+                              minadet: 1,
+                              adetgetir: (val) {
+                                adet = int.parse(val.toString());
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Obx(() => Row(children: [
+                            IconButton(
+                              style:
+                                  ElevatedButton.styleFrom(primary: Colors.red),
+                              onPressed: () {
+                                c.favorile();
+                              },
+                              icon: c.favori.value == false
+                                  ? Icon(
+                                      FontAwesome.heart,
+                                      color: Colors.grey,
+                                      size: 20,
+                                    )
+                                  : Icon(
+                                      FontAwesome.heart,
+                                      color: Color.fromARGB(255, 235, 20, 4),
+                                      size: 20,
+                                    ),
+                            )
+                          ])),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 126, 5, 5)),
+                        child: const Text("Sepete Ekle"),
+                        onPressed: () {
+                          List urun = [{}];
+                          var durun = Config().sepetekle(urun, adet);
+                        },
+                      ),
+                    ]))),
         body: Center(
             child: FutureBuilder<QuerySnapshot>(
                 // <2> Pass `Future<QuerySnapshot>` to future
@@ -71,96 +157,143 @@ class urundetaystate extends State<urundetay> {
                     return CustomScrollView(
                       controller: _scrollController,
                       slivers: [
-                        SliverToBoxAdapter(
-                          child: Stack(children: [
-                            Container(
-                              color: Colors.white,
-                              height: MediaQuery.of(context).size.width / 3 * 2,
-                              child: Stack(
-                                children: [
-                                  PageView.builder(
-                                    onPageChanged: (index) {
-                                      setState(() {
-                                        pageIndex = index;
-                                      });
-                                    },
-                                    itemCount: resimler!.length,
-                                    itemBuilder:
-                                        (BuildContext context, int itemIndex) {
-                                      var resimitem = resimler![itemIndex];
-                                      return Image.network(
-                                        resimitem,
-                                        fit: BoxFit.contain,
-                                      );
-                                    },
-                                  ),
-                                  Positioned(
-                                    child: SizedBox(
-                                      height: 15,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Center(
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      10 -
-                                                  10,
-                                              height: 10,
-                                              margin: const EdgeInsets.all(5),
-                                              color: (pageIndex == index)
-                                                  ? Colors.red
-                                                  : Colors.grey,
-                                            );
-                                          },
-                                          itemCount: resimler?.length,
+                        SliverAppBar(
+                          expandedHeight: MediaQuery.of(context).size.width /
+                              3 *
+                              2, // 200.0,
+                          floating: false,
+                          pinned: true,
+                          flexibleSpace: FlexibleSpaceBar(
+                            background: Stack(children: [
+                              Container(
+                                color: Colors.white,
+                                height:
+                                    MediaQuery.of(context).size.width / 3 * 2,
+                                child: Stack(
+                                  children: [
+                                    PageView.builder(
+                                      onPageChanged: (index) {
+                                        setState(() {
+                                          pageIndex = index;
+                                        });
+                                      },
+                                      itemCount: resimler.length,
+                                      itemBuilder: (BuildContext context,
+                                          int itemIndex) {
+                                        var resimitem = resimler[itemIndex];
+                                        return Image.network(
+                                          resimitem,
+                                          fit: BoxFit.contain,
+                                        );
+                                      },
+                                    ),
+                                    Positioned(
+                                      child: SizedBox(
+                                        height: 15,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Center(
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        10 -
+                                                    10,
+                                                height: 10,
+                                                margin: const EdgeInsets.all(5),
+                                                color: (pageIndex == index)
+                                                    ? Colors.red
+                                                    : Colors.grey,
+                                              );
+                                            },
+                                            itemCount: resimler.length,
+                                          ),
                                         ),
                                       ),
+                                      bottom: 10,
                                     ),
-                                    bottom: 10,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ]),
+                                  ],
+                                ),
+                              )
+                            ]),
+                          ),
                         ),
                         SliverToBoxAdapter(
+                            child: Center(
                           child: Text(
                             body["adi"].toString(),
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                        ),
+                        )),
                         SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Expanded(
-                                  child: Text("${body["aciklama"]}"),
-                                ),
-                                RatingBarIndicator(
-                                  rating: double.parse(
-                                      body["genelpuan"].toString()),
-                                  itemCount: 5,
-                                  itemSize: 16,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, _) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                ),
+                                Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text("${body["aciklama"]}"),
+                                        RawMaterialButton(
+                                          onPressed: (() {}),
+                                          child: Text(
+                                            "Tümünü Gör",
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        )
+                                      ],
+                                    )),
                                 const SizedBox(
-                                  width: 15,
+                                  height: 20,
                                 ),
-                                Text(
-                                  "Satış: ${body["satisadeti"]} ",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 10),
-                                )
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    RatingBarIndicator(
+                                      rating: double.parse(
+                                          body["genelpuan"].toString()),
+                                      itemCount: 5,
+                                      itemSize: 16,
+                                      physics: const BouncingScrollPhysics(),
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "Satış: ${body["satisadeti"]} ",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 10),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      "Değerlendirme: ${body["yorumsayisi"]} ",
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 10),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -192,52 +325,6 @@ class urundetaystate extends State<urundetay> {
                                 visible: true,
                               ),
                               Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RichText(
-                                        maxLines: 3,
-                                        text: TextSpan(
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${body["fiyat"]}.00 ₺',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                                fontSize: 22,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  ' / ${"adet"} ${body["birim"]}',
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  SizedBox(
-                                    width: 150,
-                                    child: Adetinput(
-                                      ilkadet: adet,
-                                      maxadet: 10,
-                                      minadet: 1,
-                                      adetgetir: (val) {
-                                        adet = int.parse(val.toString());
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -251,62 +338,57 @@ class urundetaystate extends State<urundetay> {
                                       textAlign: TextAlign.center,
                                     )
                                   ]),
-                              SizedBox(
-                                  width: double.infinity,
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        ElevatedButton(
-                                          child: const Text("Sepete Ekle"),
-                                          onPressed: () {
-                                            List urun = [{}];
-                                            var durun =
-                                                Config().sepetekle(urun, adet);
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.white),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Icon(
-                                              Icons.arrow_back,
-                                              color: Colors.black,
-                                            )),
-                                        Obx(() => Row(children: [
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    primary: Colors.white),
-                                                onPressed: () {
-                                                  c.favorile();
-                                                },
-                                                child: c.favori.value == false
-                                                    ? Icon(
-                                                        FontAwesome.heart_empty,
-                                                        color: Colors.black,
-                                                        size: 22,
-                                                      )
-                                                    : Icon(
-                                                        FontAwesome.heart,
-                                                        color: Colors.red,
-                                                        size: 22,
-                                                      ),
-                                              )
-                                            ])),
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.white),
-                                            onPressed: () {},
-                                            child: Icon(
-                                              Icons.question_mark,
-                                              color: Colors.white,
-                                            )),
-                                      ]))
                             ],
                           ),
-                        ))
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "urun seçenekler",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "teslimat seçenekleri",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "yorumlar",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "kampanyalar",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "urun açiklama,özellikler,soru cevap. iptal iade,taksit",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                        SliverToBoxAdapter(
+                            child: Center(
+                          child: Text(
+                            "diğer urunler",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
                       ],
                     );
                   } else if (snapshot.hasError) {
