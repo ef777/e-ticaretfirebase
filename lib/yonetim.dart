@@ -42,7 +42,7 @@ class yonetim extends StatelessWidget {
       title: 'Pınar Kuruyemiş',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: Config.login == 0 ? '/welcome' : '/home',
+      initialRoute: Config.login == 1 ? '/welcome' : '/home',
       routes: {
         '/': (context) => const home(),
         '/welcome': (context) => WelcomeScreen(),
@@ -74,15 +74,15 @@ class yonetim extends StatelessWidget {
             );
           case '/cart':
             return MaterialPageRoute(
-              builder: (context) => const mycart(),
+              builder: (context) => mycart(),
             );
           case '/categories':
             return MaterialPageRoute(
-              builder: (context) => const categories(),
+              builder: (context) => categories(),
             );
           default:
             return MaterialPageRoute(
-              builder: (context) => const home(),
+              builder: (context) => home(),
             );
         }
       },

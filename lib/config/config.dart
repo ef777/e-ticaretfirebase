@@ -26,6 +26,8 @@ class getconfig extends GetxController {
 class Config extends ChangeNotifier {
   static int login = 0;
 
+  static String siralama = "0";
+
   static int selectedIndex = 0;
   static bool konumsecildi = false;
   static String anapagesecilen = "";

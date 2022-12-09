@@ -28,6 +28,109 @@ class categoriespageState extends State<categories> {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
     final double itemWidth = size.width / 2;
-    return Scaffold(key: _scaffoldKey, appBar: AppBar(), body: Container());
+    return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(),
+        body: Container(
+
+            //grid view with all cateogries and subcategories with items iamges clickable to item details
+            child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: (itemWidth / itemHeight),
+                padding: const EdgeInsets.all(10),
+                children: <Widget>[
+              Card(
+                elevation: 10,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      pageview = 0;
+                    });
+                    _pageController.animateToPage(pageview,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Icon(
+                        FontAwesome.leaf,
+                        size: 50,
+                        color: Colors.green,
+                      ),
+                      const Text('Kuruyemiş'),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 10,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      pageview = 1;
+                    });
+                    _pageController.animateToPage(pageview,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Icon(
+                        FontAwesome.leaf,
+                        size: 50,
+                        color: Colors.green,
+                      ),
+                      const Text('Meyve'),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 10,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      pageview = 2;
+                    });
+                    _pageController.animateToPage(pageview,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Icon(
+                        FontAwesome.leaf,
+                        size: 50,
+                        color: Colors.green,
+                      ),
+                      const Text('Sebze'),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                  elevation: 10,
+                  child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          pageview = 3;
+                        });
+                        _pageController.animateToPage(pageview,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOut);
+                      },
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Icon(
+                              FontAwesome.leaf,
+                              size: 50,
+                              color: Colors.green,
+                            ),
+                          ])))
+            ])));
   }
 }

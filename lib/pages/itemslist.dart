@@ -121,6 +121,7 @@ class item_liststate extends State<item_list> {
     String degerlen = 'a';
     String kucret = 'a';
     String ksure = 'a';
+    String siralama = 'a';
 
     String uretim = 'a';
     String statu = 'a';
@@ -178,18 +179,11 @@ class item_liststate extends State<item_list> {
                               ])),
                       bottom: AppBar(
                         automaticallyImplyLeading: false,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.white,
                         title: SizedBox(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Kategoriler",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
                             TextButton(
                                 style: TextButton.styleFrom(
                                   primary: Colors.black,
@@ -487,375 +481,11 @@ class item_liststate extends State<item_list> {
                                                   ExpansionTile(
                                                       leading:
                                                           SizedBox(width: 20),
-                                                      title: Text(
-                                                          "Kargolama Süresi"),
-                                                      children: <Widget>[
-                                                        Container(
-                                                          child: ListTile(
-                                                            leading:
-                                                                Radio<String>(
-                                                              value: 'hepsi',
-                                                              groupValue: ksure,
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  Config.kargosure =
-                                                                      "0";
-                                                                  print(Config
-                                                                      .kargosure);
-                                                                  ksure =
-                                                                      value!;
-                                                                });
-                                                              },
-                                                            ),
-                                                            title: const Text(
-                                                                'Hepsi'),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          child: ListTile(
-                                                            leading:
-                                                                Radio<String>(
-                                                              value: 'aynıgun',
-                                                              groupValue: ksure,
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  Config.kargosure =
-                                                                      "1";
-                                                                  print(Config
-                                                                      .kargosure);
-                                                                  ksure =
-                                                                      value!;
-                                                                });
-                                                              },
-                                                            ),
-                                                            title: const Text(
-                                                                'Aynı Gün'),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          child: ListTile(
-                                                            leading:
-                                                                Radio<String>(
-                                                              value: 'biruc',
-                                                              groupValue: ksure,
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  Config.kargosure =
-                                                                      "2";
-                                                                  print(Config
-                                                                      .kargosure);
-                                                                  ksure =
-                                                                      value!;
-                                                                });
-                                                              },
-                                                            ),
-                                                            title: const Text(
-                                                                '1-3 iş Günü içerisinde'),
-                                                          ),
-                                                        ),
-                                                        ListTile(
-                                                          leading:
-                                                              Radio<String>(
-                                                            value: 'birsaat',
-                                                            groupValue: ksure,
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                Config.kargosure =
-                                                                    "3";
-                                                                print(Config
-                                                                    .kargosure);
-                                                                ksure = value!;
-                                                              });
-                                                            },
-                                                          ),
-                                                          title: const Text(
-                                                              '1 Saat içerisinde'),
-                                                        ),
-                                                        ListTile(
-                                                          leading:
-                                                              Radio<String>(
-                                                            value: 'gunici',
-                                                            groupValue: ksure,
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                Config.kargosure =
-                                                                    "4";
-                                                                print(Config
-                                                                    .kargosure);
-                                                                ksure = value!;
-                                                              });
-                                                            },
-                                                          ),
-                                                          title: const Text(
-                                                              'Gün içerisinde'),
-                                                        ),
-                                                      ]),
-                                                  ExpansionTile(
-                                                      leading:
-                                                          SizedBox(width: 20),
                                                       title: Text("Fiyat"),
                                                       children: <Widget>[
                                                         Container(
                                                             height: 120,
                                                             child: range()),
-                                                      ]),
-                                                  ExpansionTile(
-                                                      leading:
-                                                          SizedBox(width: 20),
-                                                      title: Text("Statü"),
-                                                      children: <Widget>[
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .bahceden,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.bahceden =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .bahceden);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Bahçeden"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .yoresel,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.yoresel =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .yoresel);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Yöresel"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .dogal,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.dogal =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .dogal);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child:
-                                                                  Text("Doğal"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .organik,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.organik =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .organik);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Organik"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .tasarim,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.tasarim =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .tasarim);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Tasarım"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .endust,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.endust =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .endust);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Endüstriyel"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                      ]),
-                                                  ExpansionTile(
-                                                      leading:
-                                                          SizedBox(width: 20),
-                                                      title: Text("Kimden"),
-                                                      children: <Widget>[
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .uretici,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.uretici =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .uretici);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Üretici"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .koopera,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.koopera =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .koopera);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Kooperatif"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
-                                                        Container(
-                                                          child: Row(children: [
-                                                            Expanded(
-                                                              child: Checkbox(
-                                                                value: Config
-                                                                    .magaza,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    Config.magaza =
-                                                                        value!;
-                                                                    print(Config
-                                                                        .magaza);
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                  "Mağaza"),
-                                                            ),
-                                                            Expanded(
-                                                              child: Icon(
-                                                                  Icons.list),
-                                                            )
-                                                          ]),
-                                                        ),
                                                       ]),
                                                   ExpansionTile(
                                                       leading:
@@ -917,101 +547,306 @@ class item_liststate extends State<item_list> {
                                                           ]),
                                                         ),
                                                       ]),
+                                                  SizedBox(
+                                                    height: 60,
+                                                  )
+                                                ]),
+                                            Align(
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      ElevatedButton(
+                                                          onPressed: () {
+                                                            urunlsitem.clear();
+                                                            setState(() {});
+                                                            getUrunliste(
+                                                                widget
+                                                                    .kategorim,
+                                                                0);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Icon(
+                                                              Icons.check)),
+                                                      ElevatedButton(
+                                                          onPressed: () {
+                                                            Config.kanal =
+                                                                "perakende";
+                                                            Config.kargosure =
+                                                                "0";
+                                                            Config.kargoucret =
+                                                                "0";
+                                                            Config.minfiyat = 0;
+                                                            Config.iceriku =
+                                                                "0";
+                                                            Config.statu = "0";
+                                                            Config.kimden = "0";
+                                                            Config.uretim = "0";
+                                                            Config.tezgah = "0";
+                                                            Config.degerlendirme =
+                                                                "0";
+                                                            //statu
+                                                            Config.bahceden =
+                                                                false;
+                                                            Config.yoresel =
+                                                                false;
+                                                            Config.dogal =
+                                                                false;
+                                                            Config.organik =
+                                                                false;
+                                                            Config.tasarim =
+                                                                false;
+                                                            Config.endust =
+                                                                false;
+// kimden
+                                                            Config.uretici =
+                                                                false;
+                                                            Config.koopera =
+                                                                false;
+                                                            Config.magaza =
+                                                                false;
+
+                                                            //uretim
+                                                            Config.yerli =
+                                                                false;
+                                                            Config.ithal =
+                                                                false;
+                                                            urunlsitem.clear();
+                                                            setState(() {});
+                                                            getUrunliste(
+                                                                widget
+                                                                    .kategorim,
+                                                                0);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Icon(Icons
+                                                              .restart_alt))
+                                                    ])),
+                                          ]);
+                                        },
+                                      );
+
+                                      print("tıklanmadı");
+                                    },
+                                  );
+                                }),
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  alignment: Alignment.center,
+                                ),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(FontAwesome.up),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text("Sırala "),
+                                    ]),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    //  isScrollControlled: true,
+                                    builder: (context) {
+                                      return StatefulBuilder(
+                                        builder: (BuildContext context,
+                                            StateSetter
+                                                setState /*You can rename this!*/) {
+                                          return Stack(children: [
+                                            Align(
+                                                alignment: Alignment.topCenter,
+                                                child: Column(children: [
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 50,
+                                                    child: Divider(
+                                                        height: 3,
+                                                        thickness: 3,
+                                                        color: Colors.grey),
+                                                  )
+                                                ])),
+                                            ListView(
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                children: <Widget>[
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
                                                   ExpansionTile(
                                                       leading:
                                                           SizedBox(width: 20),
-                                                      title: Text("İçerik"),
+                                                      title: Text("Sıralama"),
                                                       children: <Widget>[
                                                         Container(
                                                           child: ListTile(
                                                             leading:
                                                                 Radio<String>(
-                                                              value: 'hepsi',
+                                                              value: 'onerilen',
                                                               groupValue:
-                                                                  icerik,
+                                                                  siralama,
                                                               onChanged:
                                                                   (value) {
                                                                 setState(() {
-                                                                  Config.iceriku =
+                                                                  Config.siralama =
                                                                       "0";
                                                                   print(Config
-                                                                      .iceriku);
-                                                                  icerik =
+                                                                      .siralama);
+                                                                  siralama =
                                                                       value!;
                                                                 });
                                                               },
                                                             ),
                                                             title: const Text(
-                                                                'Hepsi'),
+                                                                'Önerilen'),
                                                           ),
                                                         ),
                                                         Container(
                                                           child: ListTile(
                                                             leading:
                                                                 Radio<String>(
-                                                              value: 'vegan',
+                                                              value: 'artan',
                                                               groupValue:
-                                                                  icerik,
+                                                                  siralama,
                                                               onChanged:
                                                                   (value) {
                                                                 setState(() {
-                                                                  Config.iceriku =
-                                                                      "1";
+                                                                  Config.siralama =
+                                                                      "0";
                                                                   print(Config
-                                                                      .iceriku);
-                                                                  icerik =
+                                                                      .siralama);
+                                                                  siralama =
                                                                       value!;
                                                                 });
                                                               },
                                                             ),
                                                             title: const Text(
-                                                                'Vegan'),
+                                                                'Artan Fiyat'),
                                                           ),
                                                         ),
                                                         Container(
                                                           child: ListTile(
                                                             leading:
                                                                 Radio<String>(
-                                                              value: 'gluten',
+                                                              value: 'azalan',
                                                               groupValue:
-                                                                  icerik,
+                                                                  siralama,
                                                               onChanged:
                                                                   (value) {
                                                                 setState(() {
-                                                                  Config.iceriku =
-                                                                      "2";
+                                                                  Config.siralama =
+                                                                      "0";
                                                                   print(Config
-                                                                      .iceriku);
-                                                                  icerik =
+                                                                      .siralama);
+                                                                  siralama =
                                                                       value!;
                                                                 });
                                                               },
                                                             ),
                                                             title: const Text(
-                                                                'Glütensiz'),
+                                                                'Azalan Fiyat'),
                                                           ),
                                                         ),
                                                         Container(
                                                           child: ListTile(
                                                             leading:
                                                                 Radio<String>(
-                                                              value: 'diyet',
+                                                              value: 'coksatan',
                                                               groupValue:
-                                                                  icerik,
+                                                                  siralama,
                                                               onChanged:
                                                                   (value) {
                                                                 setState(() {
-                                                                  Config.iceriku =
-                                                                      "5";
+                                                                  Config.siralama =
+                                                                      "0";
                                                                   print(Config
-                                                                      .iceriku);
-                                                                  icerik =
+                                                                      .siralama);
+                                                                  siralama =
                                                                       value!;
                                                                 });
                                                               },
                                                             ),
                                                             title: const Text(
-                                                                'Diyet'),
+                                                                'Çok Satan'),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          child: ListTile(
+                                                            leading:
+                                                                Radio<String>(
+                                                              value: 'cokdeger',
+                                                              groupValue:
+                                                                  siralama,
+                                                              onChanged:
+                                                                  (value) {
+                                                                setState(() {
+                                                                  Config.siralama =
+                                                                      "0";
+                                                                  print(Config
+                                                                      .siralama);
+                                                                  siralama =
+                                                                      value!;
+                                                                });
+                                                              },
+                                                            ),
+                                                            title: const Text(
+                                                                'Çok Değerlendirilen'),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          child: ListTile(
+                                                            leading:
+                                                                Radio<String>(
+                                                              value:
+                                                                  'yuksekpuan',
+                                                              groupValue:
+                                                                  siralama,
+                                                              onChanged:
+                                                                  (value) {
+                                                                setState(() {
+                                                                  Config.siralama =
+                                                                      "0";
+                                                                  print(Config
+                                                                      .siralama);
+                                                                  siralama =
+                                                                      value!;
+                                                                });
+                                                              },
+                                                            ),
+                                                            title: const Text(
+                                                                'Yüksek Puan'),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          child: ListTile(
+                                                            leading:
+                                                                Radio<String>(
+                                                              value: 'yeni',
+                                                              groupValue:
+                                                                  siralama,
+                                                              onChanged:
+                                                                  (value) {
+                                                                setState(() {
+                                                                  Config.siralama =
+                                                                      "0";
+                                                                  print(Config
+                                                                      .siralama);
+                                                                  siralama =
+                                                                      value!;
+                                                                });
+                                                              },
+                                                            ),
+                                                            title: const Text(
+                                                                'Yeni Ürün'),
                                                           ),
                                                         ),
                                                       ]),
@@ -1103,13 +938,6 @@ class item_liststate extends State<item_list> {
                                     },
                                   );
                                 }),
-                            Text(
-                              "Sırala",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
                           ],
                         )),
                       ),

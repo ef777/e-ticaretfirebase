@@ -63,6 +63,7 @@ class _HomeState extends State<home> {
       item_list(
         kategorim: '1',
       ),
+      categories(),
       mycart(),
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];
@@ -122,6 +123,13 @@ class _HomeState extends State<home> {
                     width: 20,
                   ),
                   label: "Ürünler",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesome5.list,
+                    size: 20,
+                  ),
+                  label: "Kategoriler",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
