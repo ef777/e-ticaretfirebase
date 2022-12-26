@@ -53,7 +53,7 @@ class yonetim extends StatelessWidget {
         '/itemlist': (context) => item_list(
               kategorim: '1',
             ),
-        '/cart': (context) => const mycart(),
+        '/cart': (context) => MyCart(),
         '/categories': (context) => categories(),
       },
       onGenerateRoute: (RouteSettings settings) {
@@ -74,7 +74,7 @@ class yonetim extends StatelessWidget {
             );
           case '/cart':
             return MaterialPageRoute(
-              builder: (context) => mycart(),
+              builder: (context) => MyCart(),
             );
           case '/categories':
             return MaterialPageRoute(

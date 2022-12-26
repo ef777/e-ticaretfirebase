@@ -64,7 +64,7 @@ class _HomeState extends State<home> {
         kategorim: '1',
       ),
       categories(),
-      mycart(),
+      MyCart(),
       //(Config.logindurum == true) ? const Hesap() : const Login(),
     ];
     return WillPopScope(

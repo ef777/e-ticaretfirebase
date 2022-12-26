@@ -1,33 +1,78 @@
+// my cart page with list of items in cart and total price of items in cart
 import 'package:flutter/material.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 
-// ignore: camel_case_types
-class mycart extends StatefulWidget {
-  const mycart({Key? key}) : super(key: key);
-
+class MyCart extends StatefulWidget {
   @override
-  State<mycart> createState() => mycartState();
+  _MyCartState createState() => _MyCartState();
 }
 
-// ignore: camel_case_types
-class mycartState extends State<mycart> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  int pageview = 0;
-  late PageController _pageController;
-  @override
-  void initState() {
-    super.initState();
-
-    _pageController =
-        PageController(initialPage: pageview, viewportFraction: 0.6);
-  }
-
+class _MyCartState extends State<MyCart> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
-    final double itemWidth = size.width / 2;
-    return Scaffold(key: _scaffoldKey, appBar: AppBar(), body: Container());
+    var mycart;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Cart'),
+        backgroundColor: Colors.deepOrange,
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: mycart.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(mycart[index].image),
+                      ),
+                      title: Text(mycart[index].name),
+                      subtitle: Text('Price: ' + mycart[index].price),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            mycart.removeAt(index);
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    'Total Price: ',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  Text(
+                    'Rs. 500',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10.0),
+              child: MaterialButton(
+                child: Text(
+                  'Buy Now',
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.deepOrange,
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
+
+// Path: ankprj/lib/pages/user/myorders.dart
